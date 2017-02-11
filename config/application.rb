@@ -8,6 +8,19 @@ Bundler.require(*Rails.groups)
 
 module ItemCart
   class Application < Rails::Application
+
+    ActiveSupport.halt_callback_chains_on_return_false = false
+
+    config.action_controller.forgery_protection_origin_check = true
+
+    config.action_mailer.deliver_later_queue_name = :new_queue_name
+
+    config.action_mailer.perform_caching = true
+
+    config.active_record.dump_schemas = :all
+
+    config.ssl_options = { hsts: { subdomains: true } }
+    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
